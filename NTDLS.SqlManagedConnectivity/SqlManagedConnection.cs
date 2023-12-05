@@ -142,9 +142,9 @@ namespace NTDLS.SqlManagedConnectivity
             return new SqlManagedReader(command);
         }
 
-        public SqlManagedReader ExecuteQueryProcedure(string queryText, object? parameters = null)
+        public SqlManagedReader ExecuteQueryProcedure(string procedureName, object? parameters = null)
         {
-            var command = new SqlCommand(queryText, Native)
+            var command = new SqlCommand(procedureName, Native)
             {
                 CommandType = System.Data.CommandType.StoredProcedure
             };
@@ -160,9 +160,9 @@ namespace NTDLS.SqlManagedConnectivity
             return new SqlManagedReader(command);
         }
 
-        public void ExecuteNonQueryProcedure(string queryText, object? parameters = null)
+        public void ExecuteNonQueryProcedure(string procedureName, object? parameters = null)
         {
-            using var command = new SqlCommand(queryText, Native)
+            using var command = new SqlCommand(procedureName, Native)
             {
                 CommandType = System.Data.CommandType.StoredProcedure
             };
