@@ -1,0 +1,10 @@
+
+NTDLS.SqlManagedConnectivity/obj/
+
+NTDLS.SqlManagedConnectivity/bin/
+
+.vs/
+
+TestHarness/bin/
+
+TestHarness/obj/
