@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 
-namespace Library.ManagedConnectivity
+namespace NTDLS.SqlManagedConnectivity
 {
     /// <summary>
     /// A collection of fields that provide information about the SQL Server columns, their data types and types.

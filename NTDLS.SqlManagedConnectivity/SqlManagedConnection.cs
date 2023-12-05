@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 
-namespace Library.ManagedConnectivity
+namespace NTDLS.SqlManagedConnectivity
 {
     /// <summary>
     /// Wraps a native SQL Server connection, opens it and ensures it is cleaned up after it is used.
@@ -124,19 +124,79 @@ namespace Library.ManagedConnectivity
         /// </summary>
         /// <param name="queryText"></param>
         /// <returns></returns>
-        public SqlManagedReader ExecuteQuery(string queryText)
+        public SqlManagedReader ExecuteQuery(string queryText, object? parameters = null)
         {
-            return new SqlManagedReader(queryText, Native);
+            var command = new SqlCommand(queryText, Native)
+            {
+                CommandType = System.Data.CommandType.Text
+            };
+
+            if (parameters != null)
+            {
+                foreach (var property in parameters.GetType().GetProperties())
+                {
+                    command.Parameters.Add(new SqlParameter($"@{property.Name}", property.GetValue(parameters, null)));
+                }
+            }
+
+            return new SqlManagedReader(command);
+        }
+
+        public SqlManagedReader ExecuteQueryProcedure(string queryText, object? parameters = null)
+        {
+            var command = new SqlCommand(queryText, Native)
+            {
+                CommandType = System.Data.CommandType.StoredProcedure
+            };
+
+            if (parameters != null)
+            {
+                foreach (var property in parameters.GetType().GetProperties())
+                {
+                    command.Parameters.Add(new SqlParameter($"@{property.Name}", property.GetValue(parameters, null)));
+                }
+            }
+
+            return new SqlManagedReader(command);
+        }
+
+        public void ExecuteNonQueryProcedure(string queryText, object? parameters = null)
+        {
+            using var command = new SqlCommand(queryText, Native)
+            {
+                CommandType = System.Data.CommandType.StoredProcedure
+            };
+
+            if (parameters != null)
+            {
+                foreach (var property in parameters.GetType().GetProperties())
+                {
+                    command.Parameters.Add(new SqlParameter($"@{property.Name}", property.GetValue(parameters, null)));
+                }
+            }
+
+            command.ExecuteNonQuery();
         }
 
         /// <summary>
         /// Executes a non-query statement.
         /// </summary>
         /// <param name="statementText"></param>
-        public void ExecuteNonQuery(string statementText)
+        public void ExecuteNonQuery(string statementText, object? parameters = null)
         {
-            using var cmd = new SqlCommand(statementText, Native);
-            cmd.ExecuteNonQuery();
+            using var command = new SqlCommand(statementText, Native)
+            {
+                CommandType = System.Data.CommandType.Text
+            };
+
+            if (parameters != null)
+            {
+                foreach (var property in parameters.GetType().GetProperties())
+                {
+                    command.Parameters.Add(new SqlParameter($"@{property.Name}", property.GetValue(parameters, null)));
+                }
+            }
+            command.ExecuteNonQuery();
         }
 
         /// <summary>

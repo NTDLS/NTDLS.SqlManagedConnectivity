@@ -1,4 +1,4 @@
-﻿namespace Library.ManagedConnectivity
+﻿namespace NTDLS.SqlManagedConnectivity
 {
     /// <summary>
     /// Encapsulates a field and its value.

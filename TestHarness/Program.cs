@@ -1,4 +1,4 @@
-﻿using Library.ManagedConnectivity;
+﻿using NTDLS.SqlManagedConnectivity;
 
 namespace TestHarness
 {
@@ -8,7 +8,7 @@ namespace TestHarness
         {
             using (var connection = new SqlManagedConnection(".", "Dummyload"))
             {
-                using (var reader = connection.ExecuteQuery("SELECT * FROM Test"))
+                using (var reader = connection.ExecuteQuery("SELECT * FROM Test WHERE Account <> @Account", new { Account = 4104 }))
                 {
                     //Loop through all fields:
                     foreach (var field in reader.Fields)

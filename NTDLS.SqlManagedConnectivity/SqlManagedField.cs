@@ -1,4 +1,4 @@
-﻿namespace Library.ManagedConnectivity
+﻿namespace NTDLS.SqlManagedConnectivity
 {
     /// <summary>
     /// Provides information about a SQL Server column, its data type and type.

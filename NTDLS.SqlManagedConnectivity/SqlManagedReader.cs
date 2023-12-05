@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 
-namespace Library.ManagedConnectivity
+namespace NTDLS.SqlManagedConnectivity
 {
     /// <summary>
     /// Wraps a native SQLDataReader and provides easy row, field and value enumaration.
@@ -62,9 +62,9 @@ namespace Library.ManagedConnectivity
 
         #endregion
 
-        internal SqlManagedReader(string sqlText, SqlConnection sqlConnection)
+        internal SqlManagedReader(SqlCommand sqlCommand)
         {
-            _sqlCommand = new SqlCommand(sqlText, sqlConnection);
+            _sqlCommand = sqlCommand;
             NativeReader = _sqlCommand.ExecuteReader();
         }
 

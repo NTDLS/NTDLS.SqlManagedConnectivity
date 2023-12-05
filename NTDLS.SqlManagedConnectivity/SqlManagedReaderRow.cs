@@ -1,4 +1,4 @@
-﻿namespace Library.ManagedConnectivity
+﻿namespace NTDLS.SqlManagedConnectivity
 {
     public class SqlManagedReaderRow : IEnumerable<SqlManagedFieldValue>
     {
