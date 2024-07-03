@@ -3,7 +3,7 @@
 namespace NTDLS.SqlManagedConnectivity
 {
     /// <summary>
-    /// Wraps a native SQLDataReader and provides easy row, field and value enumaration.
+    /// Wraps a native SQLDataReader and provides easy row, field and value enumeration.
     /// </summary>
     public class SqlManagedReader : IEnumerable<SqlManagedReaderRow>, IDisposable
     {
@@ -69,7 +69,7 @@ namespace NTDLS.SqlManagedConnectivity
         }
 
         /// <summary>
-        /// Retrieves the next row in the data reader. Useful when you want to manage the enumeration manually or only fetxh a single row.
+        /// Retrieves the next row in the data reader. Useful when you want to manage the enumeration manually or only fetch a single row.
         /// </summary>
         /// <returns></returns>
         public SqlManagedReaderRow? NextRow()

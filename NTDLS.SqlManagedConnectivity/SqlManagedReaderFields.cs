@@ -47,11 +47,15 @@ namespace NTDLS.SqlManagedConnectivity
         /// <returns></returns>
         public SqlManagedField AtIndex(int index)
         {
+            if (index < 0 || index >= Collection.Count)
+            {
+                throw new Exception($"The field index [{index}] was outside of the collection bounds.");
+            }
             return Collection[index];
         }
 
         /// <summary>
-        /// Returns the index of a given field my its name (not case sensitive).
+        /// Returns the index of a given field (not case sensitive).
         /// </summary>
         /// <param name="fieldName"></param>
         /// <returns></returns>
@@ -61,20 +65,20 @@ namespace NTDLS.SqlManagedConnectivity
 
             for (int i = 0; i < Collection.Count; i++)
             {
-                if (Collection[i].LoweredName == fieldName)
+                if (Collection[i].Key == fieldName)
                 {
                     return i;
                 }
             }
-            return -1;
+            throw new Exception($"The field [{fieldName}] was not found in the collection.");
         }
 
         /// <summary>
-        /// Returns the index of a given field my its name (not case sensitive).
+        /// Returns the index of a given field (case sensitive).
         /// </summary>
         /// <param name="fieldName"></param>
         /// <returns></returns>
-        public int IndexOfInsensitive(string fieldName)
+        public int IndexOfSensitive(string fieldName)
         {
             for (int i = 0; i < Collection.Count; i++)
             {
@@ -83,7 +87,46 @@ namespace NTDLS.SqlManagedConnectivity
                     return i;
                 }
             }
-            return -1;
+            throw new Exception($"The field [{fieldName}] was not found in the collection.");
+        }
+
+        /// <summary>
+        /// Returns true if the given field is present in the collection and passes the index out through the our index parameter. (not case sensitive).        /// </summary>
+        /// <param name="fieldName"></param>
+        /// <returns></returns>
+        public bool TryGetIndex(string fieldName, out int index)
+        {
+            fieldName = fieldName.ToLowerInvariant();
+
+            for (int i = 0; i < Collection.Count; i++)
+            {
+                if (Collection[i].Key == fieldName)
+                {
+                    index = i;
+                    return true;
+                }
+            }
+            index = -1;
+            return false;
+        }
+
+        /// <summary>
+        /// Returns true if the given field is present in the collection and passes the index out through the our index parameter. (case sensitive).
+        /// </summary>
+        /// <param name="fieldName"></param>
+        /// <returns></returns>
+        public bool TryGetIndexSensitive(string fieldName, out int index)
+        {
+            for (int i = 0; i < Collection.Count; i++)
+            {
+                if (Collection[i].Key == fieldName)
+                {
+                    index = i;
+                    return true;
+                }
+            }
+            index = -1;
+            return false;
         }
 
         /// <summary>

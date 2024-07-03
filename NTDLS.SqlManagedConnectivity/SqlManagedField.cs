@@ -5,7 +5,7 @@
     /// </summary>
     public class SqlManagedField
     {
-        internal string LoweredName { get; private set; }
+        internal string Key { get; private set; }
 
         /// <summary>
         /// The name of the column.
@@ -24,7 +24,7 @@
 
         internal SqlManagedField(string name, Type type, string dataTypeName)
         {
-            LoweredName = name.ToLowerInvariant();
+            Key = name.ToLowerInvariant();
             DataTypeName = dataTypeName;
             Name = name;
             Type = type;
