@@ -6,7 +6,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <ApplicationIcon>Images\Logo.ico</ApplicationIcon>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>NTDLS.SqlManagedConnectivity</Title>
     <GenerateDocumentationFile>False</GenerateDocumentationFile>
     <Copyright>Copyright © 2026 NetworkDLS</Copyright>
@@ -16,7 +15,6 @@
     <PackageProjectUrl>https://github.com/NTDLS/NTDLS.SqlManagedConnectivity</PackageProjectUrl>
     <RepositoryUrl>https://github.com/NTDLS/NTDLS.SqlManagedConnectivity</RepositoryUrl>
     <PackageTags>sqlserver;sel-server;sql server connection;database;connectivity</PackageTags>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <IncludeSymbols>True</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageReleaseNotes>
